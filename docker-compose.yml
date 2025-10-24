@@ -1,12 +1,21 @@
-services:
+version: '3.8'
 
+services:
   frontend:
     build:
       context: .
       dockerfile: Dockerfile
       args:
+        - VITE_API_BASE_URL=http://localhost:8000
+    container_name: manulifebe-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8000
+    restart: unless-stopped
 
-        VITE_API_BASE_URL: http://localhost:8000
-
-    network_mode: "host"
-
+networks:
+  app-network:
+    external: true

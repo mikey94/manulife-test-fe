@@ -12,6 +12,7 @@
 
 <h3>Just so you know, after the above steps, the backend will run on "http://localhost:8000". Then, follow the steps below to run the frontend React app.</h3>
 
+<h2><u>Option 1</u></h2>
 
 1) Clone the repo
 
@@ -24,6 +25,22 @@
 3) Run the app
 
 ``` npm run dev ```
+
+or you can do below steps
+
+<h2><u>Option 2</u></h2>
+
+1) Clone the repo
+
+``` git clone git@github.com:mikey94/manulife-test-fe.git```
+
+2) Create a network 
+
+``` docker network create app-network ```
+
+3) Run docker compose
+
+``` docker compose up --build```
 
 <h1>Extra</h1>
 
