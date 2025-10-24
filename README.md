@@ -1,73 +1,37 @@
-# React + TypeScript + Vite
+# Steps to follow
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h3>Pre steps to run the frontend app</h3>
 
-Currently, two official plugins are available:
+1) Get the clone from the backend repository
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+``` git clone git@github.com:mikey94/manulife-test-be.git ```
 
-## React Compiler
+2) Run Docker Compose
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+``` docker compose up --build ```
 
-## Expanding the ESLint configuration
+<h3>Just so you know, after the above steps, the backend will run on "http://localhost:8000". Then, follow the steps below to run the frontend React app.</h3>
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1) Clone the repo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+``` git clone git@github.com:mikey94/manulife-test-fe.git```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2) Install dependencies
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+``` npm install ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3) Run the app
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+``` npm run dev ```
+
+<h1>Extra</h1>
+
+<h2>Screenshots</h2>
+
+<img width="1665" height="1353" alt="Screenshot 2025-10-24 at 18 39 15" src="https://github.com/user-attachments/assets/8a191edd-8701-4229-83fe-8ae907921b22" />
+<img width="1661" height="1352" alt="Screenshot 2025-10-24 at 18 39 27" src="https://github.com/user-attachments/assets/de2fc41a-468e-42a4-b312-4344716ca7c0" />
+<img width="1663" height="1354" alt="Screenshot 2025-10-24 at 18 37 52" src="https://github.com/user-attachments/assets/ba7cca31-3f7d-47cb-873b-de283b30b136" />
+<img width="1657" height="1355" alt="Screenshot 2025-10-24 at 18 38 08" src="https://github.com/user-attachments/assets/2cfa874e-a9b2-490c-9111-fe07a7fd33a0" />
+<img width="1662" height="1353" alt="Screenshot 2025-10-24 at 18 38 21" src="https://github.com/user-attachments/assets/686dc157-6c96-4909-a749-ddcc96db7b03" />
+<img width="1663" height="1352" alt="Screenshot 2025-10-24 at 18 38 44" src="https://github.com/user-attachments/assets/1aaf04a3-8090-4437-8ffe-1b05ec5db7b0" />
