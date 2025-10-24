@@ -6,7 +6,7 @@ export type loginData = {
 export type investmentResponse = {
     _id: string
     user: string
-    type: string
+    type: "stock" | "bond" | "mutual_fund"
     name: string
     quantity: number
     purchasePrice: number

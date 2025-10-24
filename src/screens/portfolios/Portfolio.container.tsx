@@ -1,5 +1,5 @@
 import PortfolioView from './PortfolioView'
-import {addInvestment, getInvestments} from "../../services/portfolio.service.ts";
+import {addInvestment, getInvestments, updateInvestment} from "../../services/portfolio.service.ts";
 import { getTransaction, addTransaction } from "../../services/transaction.service.ts";
 import {useEffect, useState} from "react";
 import type {
@@ -55,9 +55,18 @@ const PortfolioContainer = () => {
             console.log(error);
         }
     }
-
+    const updateInvestmentReq = async (id: string, investment: investmentRequest) => {
+        console.log('update data', investment, 'id', id);
+        try {
+            await updateInvestment(id, investment);
+            await fetchInvestments()
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
     return (
-        <PortfolioView investments={investments} transactions={transactions} onAddTransaction={addTransactionReq} onAddInvestment={addInvestmentReq}/>
+        <PortfolioView investments={investments} transactions={transactions} onAddTransaction={addTransactionReq} onAddInvestment={addInvestmentReq} onEditInvestment={updateInvestmentReq}/>
     );
 };
 
