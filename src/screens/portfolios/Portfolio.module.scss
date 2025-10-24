@@ -1,0 +1,100 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: #19354e;
+}
+
+h1 {
+  margin-left: 20px;
+  text-align: center;
+}
+
+.subTitle {
+  margin-left: 20px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.investmentsWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.investmentItemWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #3669aa;
+  margin: 10px;
+  justify-content: space-between;
+  padding: 20px;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.investmentItemTitleWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.investmentItemStatsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.transactionsWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.transactionItemWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #ccb84d;
+  margin: 10px;
+  justify-content: space-between;
+  padding: 20px;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.addTransactionWrapper {
+  display: flex;
+  flex-direction: column;
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: row;
+
+    input {
+      height: 40px;
+      padding-left: 10px;
+      margin-left: 10px;
+    }
+  }
+
+  .ctaWrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+}
+
+.button {
+  background-color: #14c1d1;
+  margin: 10px;
+  height: 50px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  width: 200px;
+  &:hover {
+    background-color: #14d17c;
+  }
+}
