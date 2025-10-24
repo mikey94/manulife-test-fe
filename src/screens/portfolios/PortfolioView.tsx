@@ -12,6 +12,7 @@ interface PortfolioViewProps {
     transactions: Array<transactionResponse>;
     onAddTransaction: (transaction: transactionRequest) => void;
     onAddInvestment: (investment: investmentRequest) => void;
+    onEditInvestment: (id: string, investment: investmentRequest) => void;
 }
 
 interface TransactionViewProps {
@@ -22,16 +23,25 @@ interface TransactionViewProps {
 interface InvestmentViewProps {
     investments: Array<investmentResponse>;
     onPressAddInvestment: (investment: investmentRequest) => void;
+    onPressEditInvestment: (id: string, investment: investmentRequest) => void;
 }
 
-const InvestmentView = ({ investments, onPressAddInvestment }: InvestmentViewProps) => {
+const InvestmentView = ({ investments, onPressAddInvestment, onPressEditInvestment }: InvestmentViewProps) => {
     const [onAddMode, setOnAddMode] = useState(false);
+    const [onEditMode, setOnEditMode] = useState(false);
     const [investmentObj, setInvestmentObj] = useState<investmentRequest>({
         name: "",
         purchasePrice: 0,
         quantity: 0,
         type: "stock"
     });
+    const [selectedInvestment, setSelectedInvestment] = useState<investmentRequest>({
+        name: "",
+        purchasePrice: 0,
+        quantity: 0,
+        type: 'stock'
+    });
+    const [selectedInvestmentId, setSelectedInvestmentId] = useState<string>()
     const onPress = () => {
         setOnAddMode(!onAddMode);
     }
@@ -41,6 +51,24 @@ const InvestmentView = ({ investments, onPressAddInvestment }: InvestmentViewPro
     }
     const onAddInvestment = () => {
         onPressAddInvestment(investmentObj);
+    }
+    const onPressEdit = (id: string) => {
+        setOnEditMode(true)
+        setSelectedInvestmentId(id)
+        const selectedInvestment = investments.find((investment) => investment._id === id);
+        setSelectedInvestment({
+            quantity: selectedInvestment!.quantity,
+            type: selectedInvestment!.type,
+            name: selectedInvestment!.name,
+            purchasePrice: selectedInvestment!.purchasePrice
+        })
+    }
+    const handleChangedEdit = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setSelectedInvestment(prevState => ({ ...prevState, [name]: value }));
+    }
+    const updateSelectedInvestment = () => {
+        onPressEditInvestment(selectedInvestmentId!, selectedInvestment)
     }
     return (
         <>
@@ -64,6 +92,23 @@ const InvestmentView = ({ investments, onPressAddInvestment }: InvestmentViewPro
                     </div>
                 )
             }
+            {
+                onEditMode && (
+                    <div className={styles.editWrapper}>
+                        <p className={styles.subTitle}>Edit Investment</p>
+                        <div className={styles.inputWrapper}>
+                            <input placeholder={'name'} name={'name'} defaultValue={selectedInvestment!.name} onChange={handleChangedEdit}/>
+                            <input placeholder={'price'} name={'purchasePrice'} defaultValue={selectedInvestment.purchasePrice} onChange={handleChangedEdit}/>
+                            <input placeholder={'quantity'} name={'quantity'} defaultValue={selectedInvestment.quantity} onChange={handleChangedEdit}/>
+                            <input placeholder={'type'} name={'type'} defaultValue={selectedInvestment!.type} onChange={handleChangedEdit}/>
+                        </div>
+                        <div className={styles.ctaWrapper}>
+                            <button className={styles.button} onClick={updateSelectedInvestment}>Add</button>
+                            <button className={styles.button} onClick={() => setOnEditMode(false)}>Cancel</button>
+                        </div>
+                    </div>
+                )
+            }
             <div className={styles.investmentsWrapper}>
                 {
                     investments.map((investment) => {
@@ -77,6 +122,7 @@ const InvestmentView = ({ investments, onPressAddInvestment }: InvestmentViewPro
                                     <p>Number of units : <b>{investment.quantity}</b></p>
                                     <p>Purchased price of unit : {investment.purchasePrice}</p>
                                 </div>
+                                <button className={styles.editButton} onClick={() => onPressEdit(investment._id)}>Edit</button>
                             </div>
                         )
                     })
@@ -152,11 +198,11 @@ const TransactionView = ({ transactions, onPressAddTransaction }: TransactionVie
     );
 }
 
-const PortfolioView = ({investments, transactions, onAddTransaction, onAddInvestment}: PortfolioViewProps) => {
+const PortfolioView = ({investments, transactions, onAddTransaction, onAddInvestment, onEditInvestment}: PortfolioViewProps) => {
     return (
         <div className={styles.container}>
             <h1>My Portfolio</h1>
-            <InvestmentView investments={investments} onPressAddInvestment={onAddInvestment} />
+            <InvestmentView investments={investments} onPressAddInvestment={onAddInvestment} onPressEditInvestment={onEditInvestment} />
             <TransactionView transactions={transactions} onPressAddTransaction={onAddTransaction} />
         </div>
     );

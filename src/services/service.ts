@@ -1,7 +1,7 @@
 import axios, {type AxiosInstance } from 'axios';
 import { store} from "../redux/store.ts";
 
-const baseUrl = 'http://localhost:8000';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const apiUrl = `${baseUrl}/api`;
 

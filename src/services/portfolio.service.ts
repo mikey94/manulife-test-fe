@@ -16,7 +16,7 @@ export const getInvestments = async () => {
 }
 
 export const updateInvestment = async (id: string, data: InvestmentRequest) => {
-    return api.post(`/portfolio/${id}`, data)
+    return api.put(`/portfolio/${id}`, data)
 }
 
 export const deleteInvestment = async (id: string) => {
